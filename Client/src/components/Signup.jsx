@@ -8,6 +8,7 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const [inputs, setInputs] = useState("");
 
   const handlechange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +18,17 @@ const Signup = () => {
     });
   };
 
-  const signup = (e) => {};
+  const signup = (e) => {
+    e.preventDefault();
+    const apilink = import.meta.env.VITE_signupbackend;
+    axios.post(apilink, inputValues);
+    setInputValues({
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+    });
+  };
 
   return (
     <div className=" h-screen w-full bg-slate-800 flex items-center justify-center">
@@ -31,6 +42,7 @@ const Signup = () => {
             type="text"
             className=" rounded-md p-1"
             name="firstname"
+            value={inputValues.firstname}
             onChange={handlechange}
           ></input>
           <label>Last Name</label>
@@ -38,6 +50,7 @@ const Signup = () => {
             type="text"
             className=" rounded-md p-1"
             name="lastname"
+            value={inputValues.lastname}
             onChange={handlechange}
           ></input>
           <label>Email</label>
@@ -45,6 +58,7 @@ const Signup = () => {
             type="email"
             className=" rounded-md p-1"
             name="email"
+            value={inputValues.email}
             onChange={handlechange}
           ></input>
           <label>password</label>
@@ -52,6 +66,7 @@ const Signup = () => {
             type="password"
             className=" rounded-md p-1"
             name="password"
+            value={inputValues.password}
             onChange={handlechange}
           ></input>
           <button type="submit" className=" primary-btn mt-3">

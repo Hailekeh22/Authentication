@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -8,7 +9,12 @@ const Login = () => {
 
   const login = (e) => {
     e.preventDefault();
-    console.log(credentials);
+    const apilink = import.meta.env.VITE_loginbackend;
+    axios.post(apilink, credentials);
+    setCredentials({
+      email: "",
+      password: "",
+    });
   };
 
   const handlechanges = (e) => {
@@ -32,6 +38,7 @@ const Login = () => {
             type="email"
             className=" rounded-md p-1"
             name="email"
+            value={credentials.email}
             onChange={handlechanges}
           ></input>
           <label>password</label>
@@ -39,6 +46,7 @@ const Login = () => {
             type="password"
             className=" rounded-md p-1"
             name="password"
+            value={credentials.password}
             onChange={handlechanges}
           ></input>
           <button type="submit" className=" primary-btn mt-3">
