@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
@@ -9,6 +10,7 @@ const Signup = () => {
     password: "",
   });
   const [inputs, setInputs] = useState("");
+  const navigate = useNavigate();
 
   const handlechange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +23,10 @@ const Signup = () => {
   const signup = (e) => {
     e.preventDefault();
     const apilink = import.meta.env.VITE_signupbackend;
-    axios.post(apilink, inputValues);
+    axios.post(apilink, inputValues).then((res) => {
+      console.log(res.data);
+      navigate("/login");
+    });
     setInputValues({
       firstname: "",
       lastname: "",
