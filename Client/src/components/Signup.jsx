@@ -25,6 +25,7 @@ const Signup = () => {
     const apilink = import.meta.env.VITE_signupbackend;
     axios.post(apilink, inputValues).then((res) => {
       console.log(res.data);
+      alert("Sucessfully Registerd! Now please Login to Your Account!");
       navigate("/login");
     });
     setInputValues({

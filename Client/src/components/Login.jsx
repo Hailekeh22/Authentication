@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -7,10 +8,18 @@ const Login = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const login = (e) => {
     e.preventDefault();
     const apilink = import.meta.env.VITE_loginbackend;
-    axios.post(apilink, credentials);
+    axios.post(apilink, credentials).then((res) => {
+      if (res.data.login) {
+        navigate("/Home");
+      } else {
+        alert("Login Error");
+      }
+    });
     setCredentials({
       email: "",
       password: "",
