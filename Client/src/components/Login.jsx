@@ -13,7 +13,7 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
     const apilink = import.meta.env.VITE_loginbackend;
-    axios.post(apilink, credentials).then((res) => {
+    axios.post(apilink, credentials, { withCredentials: true }).then((res) => {
       if (res.data.login) {
         navigate("/Home");
       } else {
