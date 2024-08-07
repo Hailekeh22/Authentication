@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { PinInput } from "@mantine/core";
 
 const VerifyEmail = () => {
@@ -9,7 +10,15 @@ const VerifyEmail = () => {
   };
 
   const handleSubmit = () => {
-    console.log(pin);
+    const apiLink = import.meta.env.VITE_verifyroute;
+    axios
+      .post(apiLink, pin)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

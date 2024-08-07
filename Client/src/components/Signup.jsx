@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
@@ -21,19 +21,29 @@ const Signup = () => {
   };
 
   const signup = (e) => {
-    e.preventDefault();
-    const apilink = import.meta.env.VITE_signupbackend;
-    axios.post(apilink, inputValues).then((res) => {
-      console.log(res.data);
-      alert("Sucessfully Registerd! Now please Login to Your Account!");
-      navigate("/login");
-    });
-    setInputValues({
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
-    });
+    try {
+      e.preventDefault();
+      const apilink = import.meta.env.VITE_signupbackend;
+      axios
+        .post(apilink, inputValues)
+        .then((res) => {
+          console.log(res.data);
+          alert("Sucessfully Registerd! Now please Login to Your Account!");
+          navigate("/verify");
+          setInputValues({
+            firstname: "",
+            lastname: "",
+            email: "",
+            password: "",
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+          alert("Can not Connect to the server");
+        });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

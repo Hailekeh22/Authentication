@@ -3,6 +3,7 @@ import { port } from "./constants.js";
 import cors from "cors";
 import { loginRoute, signUpRoute } from "./routes/authRouth.js";
 import { homeRoute } from "./routes/homeRoute.js";
+import { verifyEmail } from "./routes/verifyEmail.js";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import crypto from "crypto";
@@ -25,6 +26,7 @@ app.use(
 );
 
 app.use(signUpRoute);
+app.use(verifyEmail);
 app.use(loginRoute);
 app.use(homeRoute);
 
