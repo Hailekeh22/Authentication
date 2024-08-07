@@ -28,7 +28,7 @@ const Signup = () => {
         .post(apilink, inputValues)
         .then((res) => {
           console.log(res.data);
-          alert("Sucessfully Registerd! Now please Login to Your Account!");
+          alert("Verification Number has been sent to your email.");
           navigate("/verify");
           setInputValues({
             firstname: "",

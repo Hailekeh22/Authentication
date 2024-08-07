@@ -3,4 +3,4 @@ import { validateEmail } from "../controllers/validateEmail.js";
 
 export const verifyEmail = express.Router();
 
-verifyEmail.post("/verify", validateEmail);
+verifyEmail.post("/validate", validateEmail);
