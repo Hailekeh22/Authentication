@@ -29,7 +29,7 @@ const Signup = () => {
         .then((res) => {
           console.log(res.data);
           alert("Verification Number has been sent to your email.");
-          navigate("/verify");
+          navigate("/verify", { state: { email: inputValues.email } });
           setInputValues({
             firstname: "",
             lastname: "",

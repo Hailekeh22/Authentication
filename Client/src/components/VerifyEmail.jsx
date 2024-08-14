@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { PinInput } from "@mantine/core";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
   const [pin, setPin] = useState("");
+
+  const location = useLocation();
+  const email = location.state?.email;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(email);
+  }, []);
 
   const handleChange = (value) => {
     setPin(value);
@@ -12,9 +23,14 @@ const VerifyEmail = () => {
   const handleSubmit = () => {
     const apiLink = import.meta.env.VITE_verifyroute;
     axios
-      .post(apiLink, pin)
+      .post(apiLink, { email: email, code: pin })
       .then((res) => {
-        console.log(res);
+        if (res.data.emailValidated) {
+          alert("Email Verified! Please Login to you account");
+          navigate("/login");
+        } else {
+          alert("Verification code is Not Correct");
+        }
       })
       .catch((e) => {
         console.log(e);
